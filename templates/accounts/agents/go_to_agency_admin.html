@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %} Set up Agency Profile{% endblock %}
+
+{% block content %}
+<div class="container" style="padding: 3em; margin: 3em;">
+	<h1>Hi {{user.email}}</h1>
+
+	<h3>Welcome to eWaste Manager. Please complete your Profile here <a href="{% url 'agent_profile_update' user.agentprofile.pk %}"> Complete Profile</a></a></h3>
+	<h5>Your Profile is {{user.agentprofile}}</h5>
+</div>
+ {% endblock %}

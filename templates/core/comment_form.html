@@ -1,0 +1,19 @@
+{% extends 'base_edit_form.html' %}
+{% block title %}Submit a comment{% endblock %}
+<div class="form-card">
+	{% if request.user.is_customer %}
+		{% block header %}
+		Submit a comment
+		<p><a href="{% url 'customer_dashboard' %}">Back to Dashboard</a></p>
+		{% endblock %}
+		{% block form %}
+			<h5>Comment on Item: '{{ewaste.ewaste}}' you requested a pick-up for</h5>
+			{{form.as_table}}
+			{{form.media}}
+			{% csrf_token %}
+			<p><a href="{%url 'eWaste_details' ewaste.id %}">Go to Item Details</a></p>
+		{% endblock %}
+	{% else %}
+		<h3>Collection Agents accounts can not comment. Go to <a href="{% url 'agency_admin' %}">Agency Admin</a></h3>
+	{% endif %}
+</div>

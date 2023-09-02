@@ -1,0 +1,24 @@
+{% load static %}
+<title>{% block title %} Sign UP{% endblock %}</title>
+{% block sytles %}
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/sign_up.css' %}">
+{% endblock %}
+{% block content %}
+<div class="form_wrapper">
+  <div class="form_container">
+    <div class="title_container">
+      <h2>Create an account</h2>
+    </div>
+    <div class="row clearfix">
+      <div class="">
+        <div class="card-body">
+          <p class="lead">Select the type of account you want to create:</p>
+          <a href="{% url 'customer_signup_view' %}" class="btn btn-student btn-lg" role="button">Shopper</a>
+          <a href="{% url 'agent_signup_view' %}" class="btn btn-teacher btn-lg" role="button">Agent</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

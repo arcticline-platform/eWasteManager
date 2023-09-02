@@ -1,0 +1,22 @@
+{% extends 'registration/signup_form.html' %}
+{% block styles %}
+	<style type="text/css">
+		div p{
+			color: snow;
+		}
+		.container p{
+			color: #172B4D;
+		}
+	</style>
+{% endblock %}
+{% block content %}
+	<div class="container" style="background: #fff; margin: 1em; padding: 1em; border-radius: 5px;">
+		<h3>Account activation link has been sent to your email address.</h3>
+		<p>
+			Please check your email to comfirm and complete the registration.
+		</p>
+		<p>
+			If you don't recieve an email, Check your email spams Folder for the email arrival and if non, retry with a new email. We'll be waiting for you!
+		</p>
+	</div>
+{% endblock %}

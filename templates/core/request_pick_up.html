@@ -1,0 +1,14 @@
+{% extends 'base_edit_form.html' %}
+{% block title %} Request eWaste Pick Up{% endblock %}
+<div class="form-card">
+	{% if request.user.is_customer %}
+		{% block header %}Request eWaste Pick Up{% endblock %}
+		{% block form %}
+			{{form.as_p}}
+			{{form.media}}
+			{% csrf_token %}
+		{% endblock %}
+	{% else %}
+		<h3>Collection Agents accounts can not request pickup. Go to <a href="{% url 'agency_admin' %}">Agency Admin</a></h3>
+	{% endif %}
+</div>

@@ -1,0 +1,10 @@
+{% extends 'core/landing_page_base.html' %}
+
+{% block title%}JUCO Stores-logout{% endblock %}
+
+{% block content %}
+<div class="container">
+	<h1>Logged out</h1>
+	<p style="color: #172B4D;">You have sucessfuly logged out. You can <a href="{% url 'login' %}"> log-in again</a></p>
+</div>
+{% endblock %}

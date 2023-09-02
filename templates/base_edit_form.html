@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Agency Profile {% endblock %}
+    {% block styles %}
+        <style type="text/css">
+          .form-card{
+            margin: 0;
+            padding: 1em;
+            border-radius: 1em;
+            box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+            background: #fff;
+          }
+          .errorlist li{
+            color: orange;
+          }
+          input, #id_about, #id_description{
+            display: block;
+            width: 100%;
+            height: calc(1.5em + 0.75rem + 2px);
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #6e707e;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #d1d3e2;
+            border-radius: 0.35rem;
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+          }
+            @media (prefers-reduced-motion: reduce) {
+              input {
+                transition: none;
+              }
+            }
+
+            input::-ms-expand {
+              background-color: transparent;
+              border: 0;
+            }
+
+            input:focus {
+              color: #6e707e;
+              background-color: #fff;
+              border-color: #bac8f3;
+              outline: 0;
+              box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+            }
+
+            input::-webkit-input-placeholder {
+              color: #858796;
+              opacity: 1;
+            }
+
+            input::-moz-placeholder {
+              color: #858796;
+              opacity: 1;
+            }
+
+            input:-ms-input-placeholder {
+              color: #858796;
+              opacity: 1;
+            }
+
+            input::-ms-input-placeholder {
+              color: #858796;
+              opacity: 1;
+            }
+
+            input::placeholder {
+              color: #858796;
+              opacity: 1;
+            }
+
+            input:disabled, input[readonly] {
+              background-color: #eaecf4;
+              opacity: 1;
+            }
+
+            selectinput:focus::-ms-value {
+              color: #6e707e;
+              background-color: #fff;
+            }
+            #id_about, #id_description{
+                height: auto;
+            }
+            #photo-clear_id{
+                width: 20%;
+                height: calc(.5em + 0.25rem + 1px);
+                padding: 0.375rem 0.75rem;
+                font-size: .5rem;
+                display: flex;
+            }
+            #id_photo{
+                border: none;
+            }
+        </style>
+    {% endblock %}
+    {% block styles_extend %}{% endblock %}
+{% block content %} 
+<div class="form-card">
+	<div style="padding: 2em;">
+		<h2>{% block header %}{% endblock %}</h2>
+    <hr>
+	</div>
+	<form method="POST" enctype="multipart/form-data" id="form">
+    <div class="form_errors">
+      <small><strong>{{form.errors}}</strong></small>
+      <p style="color: orange;">{{form.non_field_errors}}</p>
+      </div>
+    <input type="hidden" name="next" value="{{ next }}">
+		{% block form %}{% endblock %}
+		<input type="submit" name="Save" placeholder="Save" style="background-color: #0a0f3d; color: snow; font-weight: bold;">
+	</form>
+</div>
+{% endblock %}

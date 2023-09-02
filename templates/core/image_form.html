@@ -1,0 +1,14 @@
+{% extends 'base_edit_form.html' %}
+
+{% block title %} Upload eWaste Image{% endblock %}
+<div class="card">
+	{% if not request.user.is_collection_agent %}
+		{% block header %}Upload eWaste Image{% endblock %}
+		{% block form %}
+			{{form.as_p}}
+			{% csrf_token %}
+		{% endblock %}
+	{% else %}
+		<h3>Collection Agents accounts can not request pick up. Go to <a href="{% url 'agency_admin' %}"></a></h3>
+	{% endif %}
+</div>

@@ -1,0 +1,65 @@
+{% load static %}
+<title>{% block title %} Sign UP{% endblock %}</title>
+
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="{% static 'css/sign_up.css' %}">
+{% block sytles %} {% endblock %}
+{% block content %}
+<div class="form_wrapper">
+    <div class="form_container">
+        <div class="title_container">
+            <h2>Register with Email</h2>
+        </div>
+        <div class="row clearfix">
+            <div class="">
+                <form method="post">
+                  <input type="hidden" name="next" value="{{ next }}">
+                  <p style="color: green;">Registering as a {{user_type}}</p>
+                  {% block form %}
+                  <div class="form_errors">
+                      <p><strong>{{form.errors}}</strong></p>
+                      <p>{{form.non_field_errors}}</p>
+                  </div>
+
+                  <div id="email" class="information input_field"><span><i aria-hidden="true" class="fa fa-envelope"></i></span>
+                      <input type="email" name="email" maxlength="254" autofocus="" required="" id="id_email" placeholder="Email">
+                      <span style="color: orange"></span>
+                      <p></p>
+                  </div>
+                  {% if form.username %}
+                  <div id="username" class="information input_field"><span><i aria-hidden="true" class="fa fa-user"></i></span>
+                    <input type="text" name="username" placeholder=" Choose your Username." maxlength="30" required="" id="id_username">
+                    <span style="color: orange"></span>
+                    <p></p>
+                  </div>
+                  {% endif %}
+                  <div id="passwords" class="passwords input_field"><span><i aria-hidden="true" class="fa fa-lock"></i></span>
+                    <input type="password" name="password1" autocomplete="new-password" required="" id="id_password1" placeholder="Password">
+                    <span style="color: orange"></span>
+                    <p></p>
+                    <p></p>
+                  </div>
+                  <div id="passwords" class="passwords input_field"><span><i aria-hidden="true" class="fa fa-lock"></i></span>
+                    <input type="password" name="password2" autocomplete="new-password" required="" id="id_password2" placeholder="Re-type Password">
+                    <span style="color: orange"></span>
+                    <p></p>
+                    <p></p>
+                  </div>
+                  <div>
+                    <ul>
+                      <li>Your password can’t be too similar to your other personal information.</li>
+                      <li>Your password must contain at least 8 characters.</li>
+                      <li>Your password can’t be a commonly used password.</li>
+                      <li>Your password can’t be entirely numeric.</li>
+                      </ul>
+                  </div>
+                    <p style="color: green;">By registering, you agree to our terms and conditions</p>
+                    {% csrf_token %}
+                    <input class="button" type="submit" value="Register Now"/>
+                  {% endblock %}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

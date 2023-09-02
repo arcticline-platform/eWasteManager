@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="margin: 2em; padding: 1em;">
+	<h1>Agent Profile</h1>
+	<h2>Agency: {{agency}}</h2>
+	<h3>Agent email: {{agent_profile}}</h3>
+	<a href="{% url 'create_agency_profile' agency.id %}">Complete Agency Profile</a>
+</div> 	
+{% endblock %}

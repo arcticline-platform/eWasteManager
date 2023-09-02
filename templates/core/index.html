@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block styles %}
+	<!-- Vendor CSS Files -->
+	<!-- <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet"> -->
+	
+
+{% endblock %}
+
+{% block content %}
+{% if not request.user.is_collection_agent%}
+<section id="features" class="padd-section text-center wow fadeInUp">
+	<div class="container">
+        <div class="row">
+          <div class="col-md-6 col-lg-3">
+            <div class="feature-block">
+              <img src="{% static 'images/svg/request_pickup.png' %}" alt="img" class="img-fluid">
+              <h4><a href="{% url 'request_pick_up' %}">Request a Pick Up</a></h4>
+              <p>Request pick up of an item deemed as an eWaste</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <div class="feature-block">
+              <img src="{% static 'images/svg/find_agents.png' %}" alt="img" class="img-fluid">
+              <h4><a href="{% url 'agencies' %}">Find Agents</a></h4>
+              <p>Find agents and comunicate directly</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <div class="feature-block">
+              <img src="{% static 'images/svg/learn.png' %}" alt="img" class="img-fluid">
+              <h4>Learn More</h4>
+              <p>Importance of proper eWaste Disposal</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <div class="feature-block">
+              <img src="{% static 'images/svg/dashboard.webp' %}" alt="img" class="img-fluid">
+              <h4><a href="{% url 'customer_dashboard' %}">Dashboard</a></h4>
+              <p>View Your User Data and make changes to Pick Ups</p>
+            </div>
+          </div>
+        </div>
+    </div>
+</section>
+{% else %}
+	<h3>Go to Agency Panel <a href="{% url 'agency_admin' %}">View Now</a></h3> 
+{% endif %}
+{% endblock %}
+{% block scripts %}
+	<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+	<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+	<script src="{% static 'vendor/owl.carousel/owl.carousel.min.js' %}"></script>
+	<script src="{% static 'vendor/hoverIntent/hoverIntent.js' %}"></script>
+{% endblock %}

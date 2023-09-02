@@ -1,0 +1,1 @@
+web: gunicorn eWasteManager.wsgi --log-file -

@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block styles %}
+	<style type="text/css">
+		.card{
+			border-style: solid;
+			border-radius: 1em;
+			padding: 1em;
+			margin: 1em;
+		}
+		#shipping {
+          font-family: Arial, Helvetica, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+
+        #shipping td a {
+          word-wrap: break-word;
+        }
+        #shipping td, #shipping th {
+          border: 1px solid #ddd;
+          padding: 8px;
+        }
+
+        #shipping tr:nth-child(even){background-color: #f2f2f2;}
+
+        #shipping tr:hover {background-color: #ddd;}
+
+        #shipping th {
+          padding-top: 12px;
+          padding-bottom: 12px;
+          text-align: left;
+          background-color: #04AA6D;
+          color: white;
+        }
+        .countryselectwidget{
+        	width: 50%;
+        }
+        form input{
+            padding: 11px 20px;
+            margin: 8px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+	</style>
+{% endblock %}
+{% block content %}
+<div>
+	<h4>eWaste Collection Agents</h4>
+	<div class="card">
+		<div>
+			<table id="shipping">
+				<tr>
+					<th>Name</th>
+	
+					<th>Phone Contact</th>
+					<th>Location</th>
+					<th>Pricing</th>
+					<th>Transport Fee per km (UGX)</th>
+				</tr>
+				{% for agency in agencies %}
+				<tr><!-- {% url 'agency_details' agency.id %}
+ -->					<td><a href="#">{{agency.name}}</a></td>
+					<!-- <td><a href="mailto:{{agency.email}}">{{agency.email}}</a></td> -->
+					<td><a href="tel: {{agency.phone_number}}">{{agency.phone_number}}</a></td>
+					<td>{{agency.location}}</td>
+					<td>{{agency.price}}</td>
+					<td>{{agency.tranport_fee}}</td>
+				</tr>
+				{% endfor %}
+			</table>
+		</div>	
+	</div>
+</div> 	
+{% endblock %}

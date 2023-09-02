@@ -1,0 +1,155 @@
+
+body{
+
+}
+h5{
+	font-size: 1em;
+}
+.navigation{
+	padding-bottom: 1em;
+}
+.Nav-head{
+	color: green;
+}
+.nav-items{
+}
+.nav-items-list{
+	list-style: none;
+}
+li a:hover{
+	text-decoration: none;
+}
+/** rgb(151, 153, 168); **/
+li:hover{
+	color: rgb(9, 82, 92);
+	opacity: 0.5;
+	outline: none;
+	transform: scale(1.1);
+	font-weight: bold;
+	text-decoration: none;
+	
+}
+.individual_item{
+	display: flex;
+	margin-right: 2em;
+	color: rgb(32, 136, 177);
+}
+.fa {
+	margin-right: 1em;
+}
+
+.render_view{
+	background: #e2e8f3;
+}
+
+.search{
+	font-size: 15px;
+	color: #fff;
+	margin-bottom: 16px;
+	margin-top: .2em;
+	margin: 0rem auto;
+	max-width: 700px;
+	border-radius: 3px;
+	position: relative;
+
+}
+.search_form{
+	display: flex;
+}
+.search-field{
+
+}
+form input, form textarea{
+	background: #fff;
+	border: none;
+	color: #6b778d;
+	font-size: 16px;
+	line-height: 16px;
+	padding: 16px 20px;
+	width: 100%;
+	
+
+}
+} 
+input, button {
+	overflow: visible;
+}
+.btn{
+	display: inline-block;
+	background-color: rgb(18, 15, 65);
+	border: none;
+	cursor: pointer;
+	font-size: 16px;
+	text-align: center;
+	color: #fff;
+	width: 30%;
+	background: rgb(32, 173, 192);
+	line-height: 35px;
+	display: inline-block;
+	border-radius: 25px;
+	transition: 0.5s ease-out;
+	font-weight: 700;
+	display: block;
+	height: 50px;
+	margin: 0 auto;
+	border-radius: 0;
+}
+button{
+
+}
+button:hover {
+	background: rgb(1, 6, 48);
+	opacity: 0.8;
+	outline: none;
+	border: none;
+	transform: scale(1.1);
+}
+
+
+.card{
+	max-width: 500px;
+	margin: 0 auto;
+}
+
+@media (min-width: 800px){
+	.rendered_items{
+		display: flex;
+		min-width: 1000px
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.card + .card{
+		margin-left: 2em; 
+	}
+}
+
+/* User Profile */
+.card{
+	margin: .5em;
+}
+.card_head{
+	align-self: center;
+	margin-top: 2em;
+	text-align: center;
+}
+.circular__landscape{
+	display: inline-block;
+	position: relative;
+	width: 150px;
+	height: 150px;
+	overflow: hidden;
+	border-radius: 50%;
+}
+.user_image{
+	width: auto;
+	height: 100%;
+	
+}
+.market_image{
+	max-width: 150px;
+}
+.services{
+	margin-bottom: 4em;
+}
+
+

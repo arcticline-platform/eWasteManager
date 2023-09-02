@@ -1,0 +1,26 @@
+{% extends 'base_forms.html' %}
+
+{% block form_head %}Agent Login {% endblock %}
+{%block form %}
+	<div class="form_errors">
+		{% if next %}
+		    {% if user.is_authenticated %}
+		    <p>Your account doesn't have access to this page. To proceed,
+		    please login with an account that has access.</p>
+		    {% else %}
+		    <p>Please login to see this page.</p>
+		    {% endif %}
+		{% endif %}
+		<p>{{form.non_field_errors}}</p>
+	</div>
+	<div id="username" class="information input_field"><span><i aria-hidden="true" class="fa fa-user"></i></span>
+		<input type="text" name="username" autofocus="" autocapitalize="none" autocomplete="username" maxlength="254" required="" id="id_username" placeholder="Email">
+	</div>
+	<div class="input_field"><span><i aria-hidden="true" class="fa fa-lock"></i></span>
+		<input type="password" name="password" autocomplete="current-password" required="" id="id_password" placeholder="Password">
+	</div>
+	{% csrf_token%}
+	<input class="button" type="submit" value="Login"/>
+	<p><a href="{% url 'password_reset' %}">Forgot Password</a></p>
+	<p>Not Registered. <a href="{% url 'agent_signup_view' %}">Register Now</a></p>
+{% endblock %}

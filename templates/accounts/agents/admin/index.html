@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+{% block styles %}
+	<style type="text/css">
+		.card{
+			border-style: solid;
+			border-radius: 1em;
+			padding: 1em;
+			margin: 1em;
+		}
+		#shipping {
+          font-family: Arial, Helvetica, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+
+        #shipping td, #shipping th {
+          border: 1px solid #ddd;
+          padding: 8px;
+        }
+
+        #shipping tr:nth-child(even){background-color: #f2f2f2;}
+
+        #shipping tr:hover {background-color: #ddd;}
+
+        #shipping th {
+          padding-top: 12px;
+          padding-bottom: 12px;
+          text-align: left;
+          background-color: #04AA6D;
+          color: white;
+        }
+        .countryselectwidget{
+        	width: 50%;
+        }
+        form input{
+            padding: 11px 20px;
+            margin: 8px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+	</style>
+	<script type="text/javascript">
+	    var user = '{{request.user}}'
+	    function getToken(name) {
+	        var cookieValue = null;
+	        if (document.cookie && document.cookie != '') {
+	            var cookies = document.cookie.split(';');
+	            for (var i = 0; i < cookies.length; i++) {
+	                var cookie = cookies[i].trim();
+	                // Does this cookie string begin with the name we wanr?
+	                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+	                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+	                    break;
+	                }
+	            }
+	        }
+	        return cookieValue;
+	    }
+	    var csrftoken = getToken('csrftoken');
+	</script>
+{% endblock %}
+{% block content %}
+<div>
+	<h1>Agency Dashboard</h1>
+	<h2>Agency: {{agency}}</h2>
+	<h3>Agent: {{agent_profile}}</h3>
+	<div class="card">
+		<h4>Pick Up Requests</h4>
+		<div>
+			{% if pick_up_requests%}
+			<table id="shipping">
+				<tr>
+					<th>Item</th>
+					<th>Client</th>
+					<th>Contact Email</th>
+					<th>Phone Contact</th>
+					<th>Status<small> Click to update
+					</small></th>
+					<th>Address</th>
+					<!-- <th>GPS</th> -->
+					<th>Date</th>
+				</tr>
+				<div class="alert{{item.id}} alert-success" style="text-align: center; display: none;"></div>
+				{% for request in pick_up_requests %}
+				<tr>
+					<td><a href="{% url 'eWaste_details' request.id %}">{{request.ewaste}}</a></td>
+					<td>{{request.client}}</td>
+					<td><a href="mailto:{{request.email}}">{{request.email}}</a></td>
+					<td><a href="tel: {{request.phone_contact}}">{{request.phone_contact}}</a></td>
+					<td>
+						<a href="#">{{request.status}}</a>
+						{% if request.status == 'Pending' %}
+							<div class="action{{request.id}}">
+								<button type="button" class="btn btn-primary confirmBtn" confrimBtn data-request= "{{request.id}}" data-action="confirm">
+							  	Update to Picked
+								</button>
+							</div>
+						{% endif %}
+					</td>
+					<td>{{request.address}}</td>
+					<!-- <td>{{request.location}}</td> -->
+					<td>{{request.uploaded}}</td>
+				</tr>
+				{% endfor %}
+			</table>
+			{% else %}
+			<h3>No Request made to the Agency Yet</h3>
+			{% endif %}
+		</div>	
+	</div>
+</div> 	
+{% endblock %}
+{% block scripts %}
+	<script type="text/javascript">
+		var btn = document.getElementsByClassName('confirmBtn')
+		for (var i = 0; i < btn.length; i++) {
+		    btn[i].addEventListener('click', function(e) {
+		        e.preventDefault();
+		        var ewasteId = this.dataset.request
+		        var action = this.dataset.action
+		        console.log('ewasteId:', ewasteId, 'action:', action)
+		        updateEWasteStatus(ewasteId, action)
+
+		    })
+		};
+		function updateEWasteStatus(ewasteId, action, order) {
+		    console.log('Attempting to Send Data');
+
+		    if (action == 'confirm') {
+		        var url = '/agents/ewaste_status_update/'
+		    }
+		    console.log("Sending...");
+		    $.ajax({
+		        headers: { 'X-CSRFToken': csrftoken },
+		        type: 'POST',
+		        url: url,
+		        data: { 'ewasteId': ewasteId, 'action': action, 'order': order},
+		        beforeSend: function() {
+		            var action = '.action'
+		            action += ewasteId
+		            console.log(action);
+		            $(action).hide();
+		        },
+		        success: function update_content(str) {
+		            console.log("Status Updated!");
+		            var html = ``;
+		            var injection = '.alert';
+		            injection += ewasteId;
+		            console.log(injection);
+		            $(injection).show();
+		            html += `<p>You have updated an Items Status!</p>`;
+		            document.querySelector(injection).innerHTML = html;
+		            
+		        },
+		        error: function() {
+		            console.log("Error Updating Item Status!");
+		        },
+		    });
+		};
+	</script>
+{% endblock %}

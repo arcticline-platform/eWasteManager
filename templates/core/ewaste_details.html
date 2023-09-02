@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+{% block styles %}
+	<style type="text/css">
+		div p{
+			color: snow;
+		}
+		.container p{
+			color: #172B4D;
+		}
+		.card{
+			border-style: solid;
+			border-radius: 1em;
+			padding: 1em;
+			margin: 1em;
+		}
+		#shipping {
+          font-family: Arial, Helvetica, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+
+        #shipping td a {
+          word-wrap: break-word;
+        }
+        #shipping td, #shipping th {
+          border: 1px solid #ddd;
+          padding: 8px;
+        }
+        td p {
+        	color: black;
+        }
+        #shipping tr:nth-child(even){background-color: #f2f2f2;}
+
+        #shipping tr:hover {background-color: #ddd;}
+
+        #shipping th {
+          padding-top: 12px;
+          padding-bottom: 12px;
+          text-align: left;
+          background-color: #04AA6D;
+          color: white;
+        }
+        .countryselectwidget{
+        	width: 50%;
+        }
+        form input{
+            padding: 11px 20px;
+            margin: 8px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .navs a{
+        	margin-right: 2em;
+        }
+        img{
+        	max-width: 100%;
+        	padding: 1em;
+        }
+        li p{
+        	color: black;
+        }
+	</style>
+{% endblock %}
+{% block content %}
+	<div class="card">
+		<h3>Item Details</h3>
+		<hr>
+		<div style="padding: 0.1em;">
+			<table id="shipping">
+				<tr>
+					<th>Attribute</th>
+					<th>Details</th>
+				</tr>
+				<tr>
+					<td>Name</td>
+					<td>{{ewaste.ewaste}}</td>
+				</tr>
+				<tr>
+					<td>Agent</td>
+					<td>{{ewaste.agent}}</td>
+				</tr>
+				<tr>
+					<td>Description</td>
+					<td>{{ewaste.description|safe}}</td>
+				</tr>
+				<tr>
+					<td>Phone Contact</td>
+					<td><a href="tel:{{ewaste.phone_contact}}">{{ewaste.phone_contact}}</a></td>
+				</tr>
+				<tr>
+					<td>Cotact Email</td>
+					<td><a href="mailto:{{ewaste.email}}">{{ewaste.email}}</a></td>
+				</tr>
+				<tr>
+					<td>Address</td>
+					<td>{{ewaste.address}}</td>
+				</tr>
+				<!-- <tr>
+					<td>GPS</td>
+					<td>{{ewaste.location}}</td>
+				</tr> -->
+				<tr>
+					<td>Requested</td>
+					<td>{{ewaste.uploaded}}</td>
+				</tr>
+			</table>
+			{% if images %}
+				{% for img in images %}
+					<img src="{{img.image.url}}" alt="eWaste Image" class="images">
+				{% endfor %}
+			{% else %}
+				<p style="color: black;">Item has no Images</p>
+			{% endif %}
+			<hr>
+			<div>
+				{% if comments %}
+				<h3>User Comments</h3>
+				<ul>
+					{% for comment in comments %}
+					<li>
+						<small>User:<strong>U{{comment.user}}</strong></small>
+						<p>{{comment.comment|safe}}</p>
+					</li>
+					{% endfor %}
+				</ul>
+				{% endif %}
+			</div>
+			<hr>
+		</div>
+		{% if not request.user.is_collection_agent %}
+		<div style="display: flex; flex-wrap: wrap;" class="navs">
+			<a href="{% url 'eWaste_image' ewaste.id %}">Upload more Images</a>
+			<a href="{% url 'customer_dashboard' %}">Dashboard</a>
+		</div>
+		{% endif %}
+		{% if request.user.is_collection_agent %}
+		<a href="{% url 'agency_admin' %}">Back to Agency Pick Up Requests</a>
+		{% endif %}
+	</div>
+{% endblock %}

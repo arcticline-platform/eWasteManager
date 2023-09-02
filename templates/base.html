@@ -1,0 +1,147 @@
+{% load pwa %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+	<head>
+		{% progressive_web_app_meta %}
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <title>{% block title %} eWaste Manager {% endblock %}</title>
+	    <link rel="manifest" href="manifest.json">
+	    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.jpeg' %}">
+
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+	    <!-- Vendor CSS Files -->
+	    
+	    <link href="{% static 'vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+		<link href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+		<link href="{% static 'vendor/owl.carousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+		<link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+	    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+
+	    {% block styles %} {% endblock %}
+	</head>
+	<body>
+	<!-- ======= Header ======= -->
+	<header id="header" class="header header-hide">
+	    <div class="container">
+
+	        <div id="logo" class="pull-left">
+	            <!-- <h1><a href="#body" class="scrollto"><span>e</span>Startup</a></h1> -->
+	           <a href="{% url 'homepage' %}"><img  class="image_logo" src="{% static 'images/logo.png' %}" alt="Logo" title="" /></a>
+	        </div>
+
+	        <nav id="nav-menu-container">
+	            <ul class="nav-menu">
+	                <li class="menu-active"><a href="{% url 'homepage' %}">Home</a></li>
+	                <li><a href="#agents">Agent</a></li>
+	                <!-- <li><a href="#features">Gallery</a></li> -->
+	                <li><a href="#screenshots">Locations</a></li>
+	                <!-- <li><a href="#features">FAQ</a></li> -->
+	                <li><a href="mailto: ewastemanagerinfo@gmail.com">ewastemanagerinfo@gmail.com</a></li>
+	                <li><a href="tel: +256782755118">++256782755118</a></li>
+                	{%if request.user.is_authenticated %}
+                		<li><a href="#" style="color: orange;">Signed in <i class="fa fa-user"></i></a></li>
+                		<li>{{request.user}}</li>
+                		<li><a href="{% url 'logout' %}">Logout <i class="fa fa-lock"></i></a></li>
+                	{% else %}
+                		<li><a href="{% url 'customer_signup_view' %}">Register as Client</a></li>
+                		<li><a href="{% url 'customer_login' %}">Login</a></li>
+                	{% endif %}
+	            </ul>
+	        </nav><!-- #nav-menu-container -->
+	    </div>
+	</header><!-- End Header -->
+	<div class="body">
+		<div style="margin: 1em; padding: 2em;">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-success" role="alert">
+                        <p style="animation: ease; text-align: center;">{{message}}</p>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+	    {% block content %} {% endblock %}
+	</div>
+	<!-- ======= Footer ======= -->
+	<footer class="footer">
+	    <div class="container">
+	        <div class="row">
+	            <div class="col-md-12 col-lg-4">
+	                <div class="footer-logo">
+	                    <a class="navbar-brand" href="#">eWaste Manager</a>
+	                    <small style="color: white;">Clean and Safe Environment for Everyone</small>
+	                    <!-- <p><a href="#">Install App</a></p> -->
+	                </div>
+	            </div>
+	            <div class="col-sm-6 col-md-3 col-lg-2">
+	                <div class="list-menu">
+	                    <h4>Support</h4>
+	                    <ul class="list-unstyled">
+	                        <li><a href="#">About us</a></li>
+	                        <li><a href="#">FAQ</a></li>
+	                        <li><a href="#">Privacy Policy</a></li>
+	                        <li><a href="#">Feedback</a></li>
+	                    </ul>
+	                </div>
+	            </div>
+	            <!-- <div class="col-sm-6 col-md-3 col-lg-2">
+	                <div class="list-menu">
+	                    <h4>Locations</h4>
+	                    <ul class="list-unstyled">
+	                        <li><a href="#">About us</a></li>
+	                        <li><a href="#">Features item</a></li>
+	                        <li><a href="#">Live streaming</a></li>
+	                        <li><a href="#">Privacy Policy</a></li>
+	                    </ul>
+	                </div>
+	            </div> -->
+	            <div class="col-sm-6 col-md-3 col-lg-2">
+	                <div class="list-menu">
+	                    <h4 id="agents">Agents</h4>
+	                    <ul class="list-unstyled">
+	                        <li><a href="{% url 'agent_signup_view' %}">Register as Agent</a></li>
+	                        <li><a href="{% url 'agent_login' %}">Agent Login</a></li>
+	                        <li><a href="#">Privacy Policy</a></li>
+	                    </ul>
+	                </div>
+	            </div>
+	            <div class="col-sm-6 col-md-3 col-lg-2" data-aos="fade-up" data-aos-delay="300">
+		            <div class="list-menu">
+		            	<h4>Our Social Networks</h4>
+		            	<ul class="list-unstyled">
+		            		<a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+			              	<a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+			              	<a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
+			              	<a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
+		            	</ul>   
+		            </div>
+          		</div>
+	        </div>
+	    </div>
+	    <div class="copyrights">
+	        <div class="container">
+	            <p>&copy; Copyrights eWaste Manager. All rights reserved.</p>
+	        </div>
+	    </div>
+	</footer><!-- End  Footer -->
+
+	<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+	<!-- Vendor -->
+		<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+		<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+		<script src="{% static 'vendor/owl.carousel/owl.carousel.min.js' %}"></script>
+		<script src="{% static 'vendor/hoverIntent/hoverIntent.js' %}"></script>
+		<script src="{% static 'vendor/wow/wow.min.js' %}"></script>
+		<script src="{%static 'vendor/superfish/superfish.min.js' %}"></script>
+		<!-- Custom scripts -->
+		<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+	{% block scripts %} {% endblock %}
+	</body>
+</html>
