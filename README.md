@@ -1,9 +1,10 @@
 # eWasteManager is a service for managing electronic waste. 
 ** A collection agency/agent sets up an account to start a collection service in his or her locality. Users must then subscribe to the agents account to call the service when needed. In monetisation, the agents subscribe for service to set an account and they(agents) can will also be able to collect money from or pay their subscribers.
 
-** The application is developed in Python using Django Framework with HTML5, CCS3 and Javascript for the frontend.The application is location based with geospatial data for locating users. GeoDjango has been used for this purpose. <a href="https://docs.djangoproject.com/en/4.2/ref/contrib/gis/tutorial/#introduction">Read documentation</a>
+** The application is PWA developed in Python using Django Framework with HTML5, CCS3 and Javascript for the frontend.The application is location based with geospatial data for locating users. GeoDjango has been used for this purpose. <a href="https://docs.djangoproject.com/en/4.2/ref/contrib/gis/tutorial/#introduction">Read documentation</a>
 
 ** Its follows PEP8 code formating style and code reusability with Object Oriented programming is encouraged.
+
 -------------------------------------------------------------------------------------------------------------
 # Setup of the Apllication
 # Requirements
@@ -12,6 +13,7 @@
 ** Django 3.2
 
 ** PostgreSQL 13 and above with POSTGIS installed
+
 ----------------------------------------------------------
 # Installation
 1. git clone repo
